@@ -42,13 +42,13 @@ def transform_data(data: List[Dict[str, Any]]) -> polars.DataFrame:
     selected_record = {field: record.get(field) for field in fields}
     selected_data.append(selected_record)
     
-    try:
-      dataframe = polars.DataFrame(selected_data)
-    except Exception as err:
-      sentry_sdk.capture_exception(err)
-      dataframe = polars.DataFrame([])
-      
-      return dataframe
+  try:
+    dataframe = polars.DataFrame(selected_data)
+  except Exception as err:
+    sentry_sdk.capture_exception(err)
+    dataframe = polars.DataFrame([])
+    
+  return dataframe
   
 def load_data_to_parquet(dataframe: polars.DataFrame, file_path: str) -> None:
   try:
