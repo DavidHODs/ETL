@@ -1,0 +1,28 @@
+[project]
+name = "etl-pipeline"
+version = "0.1.0"
+description = "a learning project on data ETL"
+authors = [
+    {name = "DavidHODs",email = "davidoluwatobi41@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx (>=0.28.1,<0.29.0)",
+    "polars (>=1.23.0,<2.0.0)",
+    "pyarrow (>=19.0.1,<20.0.0)",
+    "sentry-sdk (>=2.22.0,<3.0.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)"
+]
+
+[[tool.poetry.packages]]
+include = "etl_pipeline"
+from = "."
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+
