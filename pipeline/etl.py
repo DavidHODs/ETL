@@ -33,13 +33,18 @@ async def extract_all_data(total_pages: int, per_page: int = 100) -> List[Dict[s
   return [record for page in pages for record in page]
 
 def transform_data(data: List[Dict[str, Any]]) -> polars.DataFrame:
-  fields = ["id", "title", "state", "reactions", "created_at", "updated_at"]
+  fields = ["id", "title", "state", "created_at", "updated_at"]
   selected_data = []
   
   for record in data:
     if record.get("title") is None or record.get("title") == "":
       record["title"] = "No Title"
     selected_record = {field: record.get(field) for field in fields}
+    
+    reactions = record.get("reactions", {})
+    selected_record["reactions_total"] = reactions.get("total_count", 0)
+    selected_record["reactions_plus1"] = reactions.get("+1", 0)
+    selected_record["reactions_minus1"] = reactions.get("-1", 0)
     selected_data.append(selected_record)
     
   try:
