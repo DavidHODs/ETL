@@ -12,7 +12,7 @@ load_dotenv(dotenv_path=".env")
 
 sentry_sdk.init(os.getenv("SENTRY_DSN", ""), traces_sample_rate=1.0)
 
-GITHUB_API_URL = "https://api.github.com/repos/pola-rs/polars/issues"
+POLARS_GITHUB_API_URL = "https://api.github.com/repos/pola-rs/polars/issues"
 
 async def extract_data(page:int, per_page:int) -> List[Dict[str, Any]]:
   params = {"page": page, "per_page": per_page}
@@ -20,7 +20,7 @@ async def extract_data(page:int, per_page:int) -> List[Dict[str, Any]]:
   
   async with httpx.AsyncClient() as client:
     try:
-      response = await client.get(GITHUB_API_URL, params=params, headers=headers)
+      response = await client.get(POLARS_GITHUB_API_URL, params=params, headers=headers)
       response.raise_for_status()
       return cast(List[Dict[str, Any]], response.json())
     except Exception as err:
