@@ -20,7 +20,7 @@ async def extract_data(page:int, per_page:int) -> List[Dict[str, Any]]:
   
   async with httpx.AsyncClient() as client:
     try:
-      response = await client.get(POLARS_GITHUB_API_URL, params=params, headers=headers)
+      response = await client.get(url=POLARS_GITHUB_API_URL, params=params, headers=headers)
       response.raise_for_status()
       return cast(List[Dict[str, Any]], response.json())
     except Exception as err:
@@ -78,5 +78,5 @@ async def run_etl_pipeline(total_pages: int, output_path: str) -> None:
   
 if __name__ == "__main__":
   total_pages_to_fetch = 10
-  output_path = "github_issues.parquet"
+  output_path = "data/github_issues.parquet"
   asyncio.run(run_etl_pipeline(total_pages_to_fetch, output_path))

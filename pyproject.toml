@@ -12,7 +12,9 @@ dependencies = [
     "polars (>=1.23.0,<2.0.0)",
     "pyarrow (>=19.0.1,<20.0.0)",
     "sentry-sdk (>=2.22.0,<3.0.0)",
-    "python-dotenv (>=1.0.1,<2.0.0)"
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "jupyter (>=1.1.1,<2.0.0)",
+    "pytest (>=8.3.5,<9.0.0)"
 ]
 
 [[tool.poetry.packages]]
